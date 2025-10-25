@@ -1,4 +1,4 @@
-import streamlit as st==3.13
+import streamlit as st
 import sys
 sys.path.append(convolution)
 from convolution import apply_convolution 
