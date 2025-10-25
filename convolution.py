@@ -4,10 +4,6 @@ import matplotlib.pyplot as plt
 import os
 
 def apply_convolution(image_path="sample.jpg"):
-    """
-    Applique une convolution 3x3 sur une image (uploadée ou par défaut).
-    Compatible avec Streamlit Cloud.
-    """
     try:
         if not os.path.exists(image_path):
             raise FileNotFoundError(f"Fichier introuvable : {image_path}")
@@ -37,5 +33,6 @@ def apply_convolution(image_path="sample.jpg"):
 
 if __name__ == "__main__":
     apply_convolution()
+
 
 
