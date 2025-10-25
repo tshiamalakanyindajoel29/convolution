@@ -4,7 +4,6 @@ import numpy as np
 import tempfile
 import os
 st.set_page_config(page_title="Convolution Application", layout="centered")
-
 st.title("Convolution Application")
 
 try:
