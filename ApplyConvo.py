@@ -1,7 +1,7 @@
-import streamlit as st
+import streamlit as st==3.13
 import sys
-st.write("PYTHONPATH :", sys.path)
-from convolution import apply_convolution
+sys.path.append(convolution)
+from convolution import apply_convolution 
 
 st.set_page_config(page_title="Convolution App", layout="centered")
 st.title("Application de Convolution avec TensorFlow")
