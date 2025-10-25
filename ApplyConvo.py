@@ -1,14 +1,10 @@
 import streamlit as st
 from PIL import Image
 import numpy as np
-
-# Page configuration (must be at the very beginning)
 st.set_page_config(page_title="Convolution Application", layout="centered")
 
-# Application title
 st.title("Convolution Application")
 
-# Handle import of the convolution module
 try:
     from convolution import apply_convolution
     module_loaded = True
@@ -16,7 +12,6 @@ except ImportError:
     st.error("Error: The 'convolution.py' module was not found or the 'apply_convolution()' function is not defined. Ensure the file exists and contains the function.")
     module_loaded = False
 
-# Image uploader
 uploaded_file = st.file_uploader("Choose an image to convolve", type=["jpg", "jpeg", "png"])
 
 if st.button("Apply convolution to the image"):
@@ -27,14 +22,10 @@ if st.button("Apply convolution to the image"):
     else:
         st.info("Executing convolution...")
         try:
-            # Load the uploaded image
             image = Image.open(uploaded_file)
-            image_array = np.array(image)  # Convert to NumPy array for convolution
-            
-            # Apply convolution (assuming apply_convolution takes the image as input and returns the processed image)
+            image_array = np.array(image)  
             result_image = apply_convolution(image_array)
             
-            # Display the original image and the result
             col1, col2 = st.columns(2)
             with col1:
                 st.subheader("Original Image")
