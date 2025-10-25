@@ -1,5 +1,5 @@
 import streamlit as st
-from convolution import apply_convolution
+from convolution.convolution import apply_convolution
 
 st.set_page_config(page_title="Convolution App", layout="centered")
 st.title("Application de Convolution avec TensorFlow")
