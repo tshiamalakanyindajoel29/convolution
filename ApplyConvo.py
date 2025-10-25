@@ -1,25 +1,51 @@
 import streamlit as st
-from convolution.convolution import apply_convolution
-import tempfile
-import os
+from PIL import Image
+import numpy as np
 
-st.set_page_config(page_title="Convolution App", layout="centered")
-st.title("Application de Convolution avec TensorFlow")
+# Page configuration (must be at the very beginning)
+st.set_page_config(page_title="Convolution Application", layout="centered")
 
-uploaded_file = st.file_uploader("Choisissez une image à convoluer", type=["jpg", "jpeg", "png"])
+# Application title
+st.title("Convolution Application")
 
-if uploaded_file is not None:
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp:
-        temp.write(uploaded_file.read())
-        temp_path = temp.name
+# Handle import of the convolution module
+try:
+    from convolution import apply_convolution
+    module_loaded = True
+except ImportError:
+    st.error("Error: The 'convolution.py' module was not found or the 'apply_convolution()' function is not defined. Ensure the file exists and contains the function.")
+    module_loaded = False
 
-    if st.button("Appliquer la convolution"):
-        st.info("Exécution du script convolution.py ...")
+# Image uploader
+uploaded_file = st.file_uploader("Choose an image to convolve", type=["jpg", "jpeg", "png"])
+
+if st.button("Apply convolution to the image"):
+    if not module_loaded:
+        st.error("Cannot execute convolution: module not loaded.")
+    elif uploaded_file is None:
+        st.error("Please upload an image first.")
+    else:
+        st.info("Executing convolution...")
         try:
-            apply_convolution(temp_path)
-            st.success("Convolution terminée.")
+            # Load the uploaded image
+            image = Image.open(uploaded_file)
+            image_array = np.array(image)  # Convert to NumPy array for convolution
+            
+            # Apply convolution (assuming apply_convolution takes the image as input and returns the processed image)
+            result_image = apply_convolution(image_array)
+            
+            # Display the original image and the result
+            col1, col2 = st.columns(2)
+            with col1:
+                st.subheader("Original Image")
+                st.image(image, use_column_width=True)
+            with col2:
+                st.subheader("Image After Convolution")
+                st.image(result_image, use_column_width=True)
+            
+            st.success("Convolution completed!")
         except Exception as e:
-            st.error(f"Erreur : {e}")
+            st.error(f"An error occurred during convolution: {e}")
 
 st.markdown("---")
-st.caption("Téléversez une image puis appliquez la convolution.")
+st.caption("Ensure that `convolution.py` contains the `apply_convolution(image_array)` function that takes a NumPy array as input and returns the processed image.")
