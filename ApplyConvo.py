@@ -6,7 +6,7 @@ st.set_page_config(page_title="Convolution Application", layout="centered")
 st.title("Convolution Application")
 
 try:
-    from model import apply_convolution
+    from convolution.py import apply_convolution()
     module_loaded = True
 except ImportError:
     st.error("Error: The 'convolution.py' module was not found or the 'apply_convolution()' function is not defined. Ensure the file exists and contains the function.")
@@ -37,3 +37,6 @@ if st.button("Apply convolution to the image"):
             st.success("Convolution completed!")
         except Exception as e:
             st.error(f"An error occurred during convolution: {e}")
+st.markdown("---")
+st.caption("Ensure that `convolution.py` contains the `apply_convolution(image_array)` function that takes a NumPy array as input and returns the processed image.")
+
