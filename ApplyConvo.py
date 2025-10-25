@@ -4,7 +4,7 @@ import numpy as np
 st.set_page_config(page_title="Convolution Application", layout="centered")
 st.title("Convolution Application")
 try:
-    from convolution import apply_convolution
+    from convolution import apply_convolution()
     module_loaded = True
 except ImportError:
     st.error("Error: The 'convolution.py' module was not found or the 'apply_convolution()' function is not defined. Ensure the file exists and contains the function.")
