@@ -1,4 +1,5 @@
-tensorflow==3.1
+tensorflow
 numpy
 matplotlib
 streamlit
+joblib
